@@ -1,7 +1,15 @@
 node {
       checkout scm
 
-      stage ('Copy DAG file to trigger Airflow') {
-            sh 'scp -r /Users/z0048yrk/Desktop/COMPLETE POC/Airflow-Components/example_dockerswarmoperator.py/ docker@140.231.96.16:/root/airflow/dags/example_dockerswarmoperator.py'
+      stage ('SSH into Swarm Node') {
+         sh 'docker-machine ssh node1'
+      }
+      
+      stage ('Define Container ID of Airflow Container') {
+         def container_id = 'docker ps --filter "name=airflow_pod" -q'   
+      }
+      
+      stage ('Copy DAG file into dir of Airflow Container') {
+        sh 'docker cp example_dockerswarmoperator.py container_id:/root/airflow/dags/example_dockerswarmoperator.py'     
       }
 }
