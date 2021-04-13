@@ -2,7 +2,7 @@ node {
       checkout scm
 
       stage ('SSH into Swarm Node') {
-         sh 'ssh -o StrictHostKeyChecking=no docker@140.231.96.16'
+         sh 'ssh -o StrictHostKeyChecking=no docker@140.231.96.16 /bin/bash'
       }
       
       stage ('Define Container ID of Airflow Container') {
