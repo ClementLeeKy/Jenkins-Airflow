@@ -11,8 +11,17 @@ node {
       remote.allowAnyHosts = true
       
       stage ('SCP Components into VM') {
-            sshPut remote: remote, from: '/var/test.py', into:'/root'
+            //Pre-Req -> docker-swarm.tar exists on Jenkins Container
+            //Stage -> Will move docker-swarm.tar from Jenkins Container into Swarm Virtual Environment
+            //sshPut remote: remote, from: '/var/test.py', into:'/root'
             sshPut remote: remote, from: '/var/docker-swarm.tar', into:'/root'
+      }
+      
+      stage ('Load Docker Image from Docker-Tar') {
+            //Stage -> Will load Docker Image from docker-swarm.tar to obtain swarm-demo image
+            sshCommand remote: remote, command: "docker load < docker-swarm.tar"
+            sshCommand remote: remote, command: "docker tag 10.11.7.57:8083/docker-swarm swarm-demo"
+            sshCommand remote: remote, command: "docker image rm 10.11.7.57:8083/docker-swarm"
       }
       
       stage ('Retrieve Container ID of Airflow Container') {
@@ -20,8 +29,11 @@ node {
       }
       
       stage ('Copy DAG file to trigger Airflow') {
+            //Pre-Req -> Apache Airflow and PostgreSQL services are running on Manager Node
+            //        -> Distribution of Containers among Worker Nodes
+            //Stage -> Will trigger Airflow DAG by copying DAG file into dag directory of airflow container
             echo "${container_id}"
-      //    sshCommand remote: remote, command: "docker cp example_dockerswarmoperator.py ${container_id}:/root/airflow/dags/example_dockerswarmoperator.py"
+            sshCommand remote: remote, command: "docker cp example_dockerswarmoperator.py ${container_id}:/root/airflow/dags/example_dockerswarmoperator.py"
       }
 }
 
