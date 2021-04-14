@@ -19,7 +19,7 @@ node {
       
       stage ('Load Docker Image from Docker-Tar') {
             //Stage -> Will load Docker Image from docker-swarm.tar to obtain swarm-demo image
-            sshCommand remote: remote, command: "docker load < docker-swarm.tar"
+            sshCommand remote: remote, command: "/root docker load < docker-swarm.tar"
             sshCommand remote: remote, command: "docker tag 10.11.7.57:8083/docker-swarm swarm-demo"
             sshCommand remote: remote, command: "docker image rm 10.11.7.57:8083/docker-swarm"
       }
