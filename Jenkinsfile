@@ -11,7 +11,8 @@ node {
       remote.allowAnyHosts = true
       
       stage ('SCP Components into VM') {
-            sshPut remote: remote, from: '/c/Users/z0048yrk/Desktop/Docker-Components/test.py', into:'/root'
+            sshPut remote: remote, from: '/var/test.py', into:'/root'
+            sshPut remote: remote, from: '/var/docker-swarm.tar', into:'/root'
       }
       
       stage ('Retrieve Container ID of Airflow Container') {
