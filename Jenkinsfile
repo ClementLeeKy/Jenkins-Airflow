@@ -1,3 +1,5 @@
+def container_id
+
 node {
       checkout scm
       def remote = [:]
@@ -8,7 +10,7 @@ node {
       remote.allowAnyHosts = true
       
       stage ('Retrieve Container ID of Airflow Container') {
-            def container_id = sshCommand remote: remote, command: "docker ps --filter 'name=airflow_pod' -q"
+            container_id = sshCommand remote: remote, command: "docker ps --filter 'name=airflow_pod' -q"
       }
       
       stage ('Copy DAG file to trigger Airflow') {
