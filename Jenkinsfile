@@ -1,7 +1,7 @@
 node {
       checkout scm
       def remote = [:]
-      remote.name = 'swarm-node'
+      remote.name = 'Swarm-Manager'
       remote.host = '10.11.7.63'
       remote.user = 'docker'
       remote.password = 'tcuser'
