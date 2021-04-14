@@ -11,7 +11,7 @@ node {
       remote.allowAnyHosts = true
       
       stage ('Inject Source-Code & Docker-Tar to Jenkins-Container') {
-            jenkins_container = sh 'docker ps --filter 'name=jenkins-local' -q'
+            jenkins_container = sh "docker ps --filter 'name=jenkins-local' -q"
             sh 'docker cp /c/Users/z0048yrk/Desktop/COMPLETE POC/Docker-Components/test.py ${jenkins_container}:/root'
             sh 'docker cp /c/Users/z0048yrk/Desktop/COMPLETE POC/Docker-Tar/docker-swarm.tar ${jenkins_container}:/root'
       }
