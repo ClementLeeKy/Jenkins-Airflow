@@ -14,7 +14,8 @@ node {
       }
       
       stage ('Copy DAG file to trigger Airflow') {
-            echo "${container_id}"
+            // echo "${container_id}"
+            sshCommand remote: remote, command: "docker cp example_dockerswarmoperator.py ${container_id}:/root/airflow/dags/example_dockerswarmoperator.py"
       }
 }
 
