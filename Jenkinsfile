@@ -8,7 +8,7 @@ node {
       remote.allowAnyHosts = true
       
       stage ('SSH into Swarm Manager') {
-            sshCommand remote: remote, command: def container_id = "docker ps --filter 'name=airflow_pod' -q"
+            def container_id = sshCommand remote: remote, command: "docker ps --filter 'name=airflow_pod' -q"
       }
 }
 
