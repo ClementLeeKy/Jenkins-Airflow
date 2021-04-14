@@ -12,7 +12,7 @@ node {
       }
       
       stage ('Copy DAG file to trigger Airflow') {
-            echo container_id
+            println(container_id)
       }
 }
 
