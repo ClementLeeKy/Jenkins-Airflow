@@ -17,14 +17,14 @@ node {
       }
 }
       
-      /*stage ('Retrieve Container ID of Airflow Container') {
-            container_id = sshCommand remote: remote, command: "docker ps --filter 'name=airflow_pod' -q"
-      }
+      //stage ('Retrieve Container ID of Airflow Container') {
+      //      container_id = sshCommand remote: remote, command: "docker ps --filter 'name=airflow_pod' -q"
+      //}
       
-      stage ('Copy DAG file to trigger Airflow') {
+      //stage ('Copy DAG file to trigger Airflow') {
             // echo "${container_id}"
-            sshCommand remote: remote, command: "docker cp example_dockerswarmoperator.py ${container_id}:/root/airflow/dags/example_dockerswarmoperator.py"
-      }
-}
+      //      sshCommand remote: remote, command: "docker cp example_dockerswarmoperator.py ${container_id}:/root/airflow/dags/example_dockerswarmoperator.py"
+      //}
+//}
 
       
