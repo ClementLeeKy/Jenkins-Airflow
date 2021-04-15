@@ -12,7 +12,7 @@ default_args = {
 dag = DAG(
     'docker_swarm_sample',          # DAG ID
     default_args=default_args,
-    schedule_interval='15 * * * *', # At 15th minute of every hour
+    schedule_interval='45 * * * *', # At 15th minute of every hour
     catchup=False
 )
 
@@ -20,7 +20,7 @@ with dag as dag:
     t1 = DockerSwarmOperator(
         api_version='auto',                   # Docker API version
         # command='/bin/sleep 45',            # Command you want to run in the container
-        image='centos:latest',                # The base image to use for running the container
+        image='swarm-demo',                # The base image to use for running the container
         auto_remove=False,                    # Cleanup the container (and Docker service) once completed
         task_id='swarm_start_container'       # Unique task ID required by Airflow
     )
