@@ -18,9 +18,13 @@ node {
             sshPut remote: remote, from: 'docker-swarm.tar', into:'/root'
          }
       }
-}
       
-      /*
+      stage ('SCP Source-Code into Swarm Cluster') {
+            dir ('C:\\Users\\z0048yrk\\Desktop\\COMPLETE POC\\Docker-Components') {
+            sshPut remote: remote, from: 'test.py', into:'/root'
+         }
+      }
+      
       stage ('Load Docker Image from Docker-Tar') {
             //Stage -> Will load Docker Image from docker-swarm.tar to obtain swarm-demo image
             sshCommand remote: remote, command: "cd /root && docker load < docker-swarm.tar"
@@ -41,6 +45,6 @@ node {
       }
 } 
 
-      */
+      
 
       
