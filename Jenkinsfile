@@ -10,14 +10,17 @@ node {
       remote.password = 'tcuser'
       remote.allowAnyHosts = true
       
-      stage ('SCP Components into VM') {
+      stage ('SCP Tar File into Swarm Cluster') {
             //Pre-Req -> docker-swarm.tar exists on Jenkins Container
             //Stage -> Will move docker-swarm.tar from Jenkins Container into Swarm Virtual Environment
             //sshPut remote: remote, from: '/var/test.py', into:'/root'
-            sshPut remote: remote, from: '/c/Users/z0048yrk/Desktop/COMPLETE POC/Docker-Tar/docker-swarm.tar', into:'/root'
-            sshPut remote: remote, from: '/c/Users/z0048yrk/Desktop/COMPLETE POC/Docker-Components/test.py', into:'/root'
+            dir ('C:\\Users\\z0048yrk\\Desktop\\COMPLETE POC\\Docker-Tar') {
+            sshPut remote: remote, from: 'docker-swarm.tar', into:'/root'
+         }
       }
+}
       
+      /*
       stage ('Load Docker Image from Docker-Tar') {
             //Stage -> Will load Docker Image from docker-swarm.tar to obtain swarm-demo image
             sshCommand remote: remote, command: "cd /root && docker load < docker-swarm.tar"
