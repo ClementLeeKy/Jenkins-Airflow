@@ -14,7 +14,8 @@ node {
             //Pre-Req -> docker-swarm.tar exists on Jenkins Container
             //Stage -> Will move docker-swarm.tar from Jenkins Container into Swarm Virtual Environment
             //sshPut remote: remote, from: '/var/test.py', into:'/root'
-            sshPut remote: remote, from: '/var/docker-swarm.tar', into:'/root'
+            sshPut remote: remote, from: '/c/Users/z0048yrk/Desktop/COMPLETE POC/Docker-Tar/docker-swarm.tar', into:'/root'
+            sshPut remote: remote, from: '/c/Users/z0048yrk/Desktop/COMPLETE POC/Docker-Components/test.py' into:'/root'
       }
       
       stage ('Load Docker Image from Docker-Tar') {
