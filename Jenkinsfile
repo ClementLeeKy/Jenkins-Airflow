@@ -32,7 +32,7 @@ node {
             //Stage -> Will move docker-swarm.tar from Jenkins Container into Swarm Virtual Environment
             //sshPut remote: remote, from: '/var/test.py', into:'/root'
             dir ('C:\\Users\\z0048yrk\\Desktop\\POC\\Docker-Tar') {
-            sshPut remote: secondRemote, from: 'docker-swarm.tar', into:'/var'
+            sshPut remote: secondRemote, from: 'docker-swarm.tar', into:'/etc'
             }
       }
 }
