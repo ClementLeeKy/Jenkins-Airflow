@@ -11,7 +11,12 @@ node {
       manager.password = 'tcuser'
       manager.allowAnyHosts = true
       
-      
+      def worker = [:]
+      worker.name = 'Swarm-Worker'
+      worker.host = '10.11.7.120'
+      worker.user = 'docker'
+      worker.password = 'tcuser'
+      worker.allowAnyHosts = true
       
       stage ('SCP Tar File into Swarm Cluster') {
             //Pre-Req -> docker-swarm.tar exists on Jenkins Container
@@ -19,12 +24,14 @@ node {
             //sshPut remote: remote, from: '/var/test.py', into:'/root'
             dir ('C:\\Users\\z0048yrk\\Desktop\\POC\\Docker-Tar') {
             sshPut manager: manager, from: 'docker-swarm.tar', into:'/root'
+            sshPut worker: worker, from: 'docker-swarm.tar', into:'/root'
          }
       }
       
       stage ('SCP Source-Code into Swarm Cluster') {
             dir ('C:\\Users\\z0048yrk\\Desktop\\POC\\Docker-Components') {
             sshPut manager: manager, from: 'test.py', into:'/root'
+            sshPut worker: worker, from: 'test.py', into:'/root'
          }
       }
       
@@ -33,6 +40,10 @@ node {
             sshCommand manager: manager, command: "cd /root && docker load < docker-swarm.tar"
             sshCommand manager: manager, command: "docker tag 10.11.7.57:8083/docker-swarm swarm-demo"
             sshCommand manager: manager, command: "docker image rm 10.11.7.57:8083/docker-swarm"
+            
+            sshCommand worker: worker, command: "cd /root && docker load < docker-swarm.tar"
+            sshCommand worker: worker, command: "docker tag 10.11.7.57:8083/docker-swarm swarm-demo"
+            sshCommand worker: worker, command: "docker image rm 10.11.7.57:8083/docker-swarm"
       }
       
       stage ('Retrieve Container ID of Airflow Container') {
