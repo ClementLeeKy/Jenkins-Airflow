@@ -24,9 +24,20 @@ node {
             //sshPut remote: remote, from: '/var/test.py', into:'/root'
             dir ('C:\\Users\\z0048yrk\\Desktop\\POC\\Docker-Tar') {
             sshPut remote: remote, from: 'docker-swarm.tar', into:'/root'
-            sshPut remote: secondRemote, from: 'docker-swarm.tar', into:'/root'
-         }
+            }
       }
+            
+      stage ('SCP Tar File into Swarm Cluster') {
+            //Pre-Req -> docker-swarm.tar exists on Jenkins Container
+            //Stage -> Will move docker-swarm.tar from Jenkins Container into Swarm Virtual Environment
+            //sshPut remote: remote, from: '/var/test.py', into:'/root'
+            dir ('C:\\Users\\z0048yrk\\Desktop\\POC\\Docker-Tar') {
+            sshPut remote: secondRemote, from: 'docker-swarm.tar', into:'/root'
+            }
+      }
+}
+
+/*
       
       stage ('SCP Source-Code into Swarm Cluster') {
             dir ('C:\\Users\\z0048yrk\\Desktop\\POC\\Docker-Components') {
@@ -59,6 +70,7 @@ node {
       }
 } 
 
+*/
       
 
       
