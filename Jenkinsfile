@@ -11,13 +11,6 @@ node {
       remote.password = 'tcuser'
       remote.allowAnyHosts = true
       
-      def secondRemote = [:]
-      secondRemote.name = 'Swarm-Worker'
-      secondRemote.host = '10.11.7.120'
-      secondRemote.user = 'docker'
-      secondRemote.password = 'tcuser'
-      secondRemote.allowAnyHosts = true
-      
       stage ('SCP Tar File into Swarm Cluster') {
             //Pre-Req -> docker-swarm.tar exists on Jenkins Container
             //Stage -> Will move docker-swarm.tar from Jenkins Container into Swarm Virtual Environment
