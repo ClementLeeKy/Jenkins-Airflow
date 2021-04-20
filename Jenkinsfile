@@ -20,7 +20,7 @@ node {
       }
       
       stage ('SCP Source-Code into Swarm Cluster') {
-            dir ('C:\\Users\\z0048yrk\\Desktop\\COMPLETE POC\\Docker-Components') {
+            dir ('C:\\Users\\z0048yrk\\Desktop\\POC\\Docker-Components') {
             sshPut remote: remote, from: 'test.py', into:'/root'
          }
       }
