@@ -24,14 +24,14 @@ node {
             //sshPut remote: remote, from: '/var/test.py', into:'/root'
             dir ('C:\\Users\\z0048yrk\\Desktop\\POC\\Docker-Tar') {
             sshPut remote: remote, from: 'docker-swarm.tar', into:'/root'
-            sshPut secondRemote: secondRemote, from: 'docker-swarm.tar', into:'/root'
+            sshPut remote: secondRemote, from: 'docker-swarm.tar', into:'/root'
          }
       }
       
       stage ('SCP Source-Code into Swarm Cluster') {
             dir ('C:\\Users\\z0048yrk\\Desktop\\POC\\Docker-Components') {
             sshPut remote: remote, from: 'test.py', into:'/root'
-            sshPut secondRemote: secondRemote, from: 'test.py', into:'/root'
+            sshPut remote: secondRemote, from: 'test.py', into:'/root'
          }
       }
       
@@ -41,9 +41,9 @@ node {
             sshCommand remote: remote, command: "docker tag 10.11.7.57:8083/docker-swarm swarm-demo"
             sshCommand remote: remote, command: "docker image rm 10.11.7.57:8083/docker-swarm"
             
-            sshCommand secondRemote: secondRemote, command: "cd /root && docker load < docker-swarm.tar"
-            sshCommand secondRemote: secondRemote, command: "docker tag 10.11.7.57:8083/docker-swarm swarm-demo"
-            sshCommand secondRemote: secondRemote, command: "docker image rm 10.11.7.57:8083/docker-swarm"
+            sshCommand remote: secondRemote, command: "cd /root && docker load < docker-swarm.tar"
+            sshCommand remote: secondRemote, command: "docker tag 10.11.7.57:8083/docker-swarm swarm-demo"
+            sshCommand remote: secondRemote, command: "docker image rm 10.11.7.57:8083/docker-swarm"
       }
       
       stage ('Retrieve Container ID of Airflow Container') {
